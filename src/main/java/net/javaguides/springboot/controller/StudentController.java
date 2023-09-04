@@ -9,9 +9,10 @@ import java.nio.file.Path;
 import java.util.List;
 
 @RestController
+@RequestMapping("/student")
 public class StudentController {
 
-    @GetMapping("/student")
+    @GetMapping
     public ResponseEntity<Student> getStudent() {
 //        return new ResponseEntity<>(
 //                new Student(1, "Ramesh", "Fadatare"),
@@ -25,7 +26,7 @@ public class StudentController {
         );
     }
 
-    @GetMapping("/students")
+    @GetMapping("/list")
     public List<Student> getStudents() {
         return List.of(
                 new Student(1, "Ramesh", "Fadatare"),
@@ -34,7 +35,7 @@ public class StudentController {
     }
 
     // Spring Boot Rest API with Path Variable
-    @GetMapping("/student/{id}/{first-name}/{last-name}")
+    @GetMapping("/{id}/{first-name}/{last-name}")
     public Student studentPathVariable(
             @PathVariable(name = "id") int studentId,
             @PathVariable(name = "first-name") String firstName,
@@ -44,7 +45,7 @@ public class StudentController {
     }
 
     // Spring Boot Rest API with Request Parameter
-    @GetMapping("/student/query")
+    @GetMapping("/query")
     public Student studentRequestVariable(
             @RequestParam(name = "id") int studentId,
             @RequestParam(name = "first-name") String firstName,
@@ -55,14 +56,14 @@ public class StudentController {
 
     // Spring Boot Rest API that handles HTTP Post Request - creating new resource
     // @PostMapping and @RequestBody
-    @PostMapping("/student/create")
+    @PostMapping("/create")
     @ResponseStatus(code = HttpStatus.CREATED)
     public ResponseEntity<Student> studentPost(@RequestBody Student student) {
         return new ResponseEntity<>(student, HttpStatus.CREATED);
     }
 
     // Spring Boot Rest API that handles HTTP Put Request - updating existing resource
-    @PutMapping("/student/{id}/update")
+    @PutMapping("/{id}/update")
     public Student updateStudent(
             @RequestBody Student student,
             @PathVariable(name = "id") int studentId
