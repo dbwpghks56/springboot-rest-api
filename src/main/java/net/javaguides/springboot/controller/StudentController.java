@@ -2,6 +2,7 @@ package net.javaguides.springboot.controller;
 
 import net.javaguides.springboot.bean.Student;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Path;
@@ -11,8 +12,17 @@ import java.util.List;
 public class StudentController {
 
     @GetMapping("/student")
-    public Student getStudent() {
-        return new Student(1, "Ramesh", "Fadatare");
+    public ResponseEntity<Student> getStudent() {
+//        return new ResponseEntity<>(
+//                new Student(1, "Ramesh", "Fadatare"),
+//                HttpStatus.OK
+//        );
+//        return ResponseEntity.ok(
+//                new Student(1, "Ramesh", "Fadatare")
+//        );
+        return ResponseEntity.ok().header("Custom-Header", "foo").body(
+                new Student(1, "Ramesh", "Fadatare")
+        );
     }
 
     @GetMapping("/students")
@@ -47,8 +57,8 @@ public class StudentController {
     // @PostMapping and @RequestBody
     @PostMapping("/student/create")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Student studentPost(@RequestBody Student student) {
-        return student;
+    public ResponseEntity<Student> studentPost(@RequestBody Student student) {
+        return new ResponseEntity<>(student, HttpStatus.CREATED);
     }
 
     // Spring Boot Rest API that handles HTTP Put Request - updating existing resource
