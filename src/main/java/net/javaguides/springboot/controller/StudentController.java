@@ -1,10 +1,8 @@
 package net.javaguides.springboot.controller;
 
 import net.javaguides.springboot.bean.Student;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -44,4 +42,23 @@ public class StudentController {
     {
         return new Student(studentId, firstName, lastName);
     }
+
+    // Spring Boot Rest API that handles HTTP Post Request
+    // @PostMapping and @RequestBody
+    @PostMapping("/student/create")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Student studentPost(@RequestBody Student student) {
+        return student;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
