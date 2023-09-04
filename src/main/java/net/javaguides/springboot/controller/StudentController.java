@@ -53,7 +53,10 @@ public class StudentController {
 
     // Spring Boot Rest API that handles HTTP Put Request - updating existing resource
     @PutMapping("/student/{id}/update")
-    public Student updateStudent(@RequestBody Student student, @PathVariable(name = "id") int studentId) {
+    public Student updateStudent(
+            @RequestBody Student student,
+            @PathVariable(name = "id") int studentId
+    ) {
         student.setId(studentId);
         return student;
     }
